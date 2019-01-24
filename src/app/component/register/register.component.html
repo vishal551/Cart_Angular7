@@ -1,8 +1,8 @@
 <mat-toolbar> <span>Registration</span> </mat-toolbar>
-<form [formGroup]="myForm">
+<form (ngSubmit)="Register(register)" [formGroup]="myform">
   <mat-card-content>
     <mat-form-field class="full-width">
-      <mat-label>First Name</mat-label>
+      <mat-label>Email</mat-label>
       <input
         matInput
         required
@@ -12,28 +12,69 @@
         id="Email"
         [(ngModel)]="register.Email"
         formControlName="Email"
-        required
       />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Last Name" name="lname" required />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Address</mat-label>
-      <input matInput placeholder="Address" name="address" required />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" name="email" />
+      <mat-error
+        *ngIf="
+          myform.controls.Email.errors?.required &&
+          myform.controls.Email.touched
+        "
+        >Email is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          myform.controls.Email.errors?.email && myform.controls.Email.touched
+        "
+        >Invalid email</mat-error
+      >
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Password" name="password" />
+      <input
+        matInput
+        required
+        type="password"
+        placeholder="Password"
+        name="Password"
+        id="Password"
+        [(ngModel)]="register.Password"
+        formControlName="Password"
+      />
+      <mat-error *ngIf="myform.controls.Password.invalid"
+        >Password is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        type="password"
+        required
+        placeholder="Confirm password"
+        id="ConfirmPassword"
+        [(ngModel)]="register.ConfirmPassword"
+        formControlName="ConfirmPassword"
+      />
+      <mat-error
+        *ngIf="
+          myform.controls.ConfirmPassword.touched &&
+          myform.controls.ConfirmPassword.errors?.required
+        "
+        >Confirm password is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          myform.controls.ConfirmPassword.touched &&
+          myform.controls.ConfirmPassword.errors?.notEqual &&
+          !myform.controls.ConfirmPassword.errors?.required
+        "
+        >Password and Confirm Password does not match</mat-error
+      >
     </mat-form-field>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary">REGISTER</button>
+    <button mat-raised-button color="primary" [disabled]="myform.invalid">
+      REGISTER
+    </button>
   </mat-card-actions>
 </form>

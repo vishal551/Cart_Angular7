@@ -6,6 +6,8 @@ import {
   Validators
 } from "@angular/forms";
 import { Register } from "src/CustomDTO/Register";
+import { RegisterService } from "src/services/register.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -13,15 +15,39 @@ import { Register } from "src/CustomDTO/Register";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  register: Register;
-  myForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  myControl = new FormControl();
+  myform: FormGroup;
+  register = new Register();
+  constructor(
+    private fb: FormBuilder,
+    private service: RegisterService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.myForm = new FormGroup({
+    this.myform = new FormGroup({
       Email: new FormControl("", Validators.required),
       Password: new FormControl("", Validators.required),
       ConfirmPassword: new FormControl("", Validators.required)
     });
+  }
+  Register(reg: Register): void {
+    debugger;
+    if (this.myform.invalid) {
+      return;
+    } else {
+      this.service.RegisterEmployee(reg).subscribe(
+        res => {
+          if (res == "success") {
+            this.router.navigate(["/login"]);
+          }
+        },
+        error => {
+          if (!error) {
+          }
+        }
+      );
+      console.log(reg);
+    }
   }
 }

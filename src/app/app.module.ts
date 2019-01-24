@@ -44,6 +44,7 @@ import { LayoutComponent } from "../layout/layout.component";
 import { RegisterComponent } from "./component/register/register.component";
 import { LoginComponent } from "./component/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatTooltipModule,
     MatTreeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
