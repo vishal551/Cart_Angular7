@@ -1,11 +1,7 @@
 <mat-toolbar> <span>LOGIN</span> </mat-toolbar>
-<mat-card class="my-card">
-  <mat-card-content>
-    <form
-      (ngSubmit)="loginUser(loginForm)"
-      class="my-form"
-      [formGroup]="myform"
-    >
+<form (ngSubmit)="loginUser(loginForm)" class="my-form" [formGroup]="myform">
+  <mat-card class="my-card">
+    <mat-card-content>
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
         <input
@@ -50,9 +46,9 @@
           >Password is required</mat-error
         >
       </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary">LOGIN</button>
-  </mat-card-actions>
-</mat-card>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">LOGIN</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -44,14 +44,20 @@ import { LayoutComponent } from "../layout/layout.component";
 import { RegisterComponent } from "./component/register/register.component";
 import { LoginComponent } from "./component/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HomeComponent } from "./component/home/home.component";
+import { MainInterceptor } from "src/Interceptor/auth.Interceptor";
+import { LoginService } from "src/services/login.service";
+import { RegisterService } from "src/services/register.service";
+import { ProductService } from "src/services/product.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +101,12 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true },
+    LoginService,
+    RegisterService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
