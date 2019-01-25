@@ -1,3 +1,21 @@
-<p>
-  home works!
-</p>
+<div *ngFor="let item of productList">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
+      <mat-card-title>{{ item.ProductName }}</mat-card-title>
+      <mat-card-subtitle>₹{{ item.ProductPrice | number }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="{{ item.ProductImage }}"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <p>{{ item.ProductDescription }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="AddToCart(item)">Add to Cart</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

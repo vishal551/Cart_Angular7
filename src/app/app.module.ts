@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatBadgeModule,
@@ -45,19 +46,27 @@ import { RegisterComponent } from "./component/register/register.component";
 import { LoginComponent } from "./component/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { HomeComponent } from "./component/home/home.component";
+import {
+  HomeComponent,
+  DialogConfirmCart
+} from "./component/home/home.component";
 import { MainInterceptor } from "src/Interceptor/auth.Interceptor";
 import { LoginService } from "src/services/login.service";
 import { RegisterService } from "src/services/register.service";
 import { ProductService } from "src/services/product.service";
+import { NgxSpinnerModule } from "ngx-spinner";
 
+import { ToastrModule } from "ngx-toastr";
+import { CartComponent } from "./component/user/cart/cart.component";
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    DialogConfirmCart,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +108,9 @@ import { ProductService } from "src/services/product.service";
     MatTreeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true },
@@ -107,6 +118,7 @@ import { ProductService } from "src/services/product.service";
     RegisterService,
     ProductService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogConfirmCart]
 })
 export class AppModule {}
